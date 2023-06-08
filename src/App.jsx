@@ -17,7 +17,6 @@ function App() {
     try{
       const response=await fetch('https://api.ipify.org?format=json')
       const jsonData=await response.json();
-      setInput(jsonData.ip)
       fetchData(jsonData.ip)
     }
     catch(error){
