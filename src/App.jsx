@@ -13,6 +13,18 @@ function App() {
   const [data, setData] = useState(null);
   const [coordinates, setCoordinates] = useState(null);
 
+  const fetchUserIP = async () => {
+    try{
+      const response=await fetch('https://api.ipify.org?format=json')
+      const jsonData=await response.json();
+      setInput(jsonData.ip)
+      fetchData(jsonData.ip)
+    }
+    catch(error){
+      console.error('Error fetching user IP:')
+    }
+  };
+  
   const fetchData = async () => {
     try {
       const response = await fetch(
@@ -45,6 +57,11 @@ function App() {
       iconUrl: markerIcon,
     });
   }, []);
+  
+  
+  useEffect(() => {
+    fetchUserIP();
+  },[]);
 
   useEffect(() => {
     console.log(coordinates);
